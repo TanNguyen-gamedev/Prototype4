@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        _player = GameObject.Find("Player");
     }
 
     private void FixedUpdate()
