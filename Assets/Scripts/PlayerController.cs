@@ -80,11 +80,11 @@ public class PlayerController : MonoBehaviour
             _hasPowerUp = true;
             Destroy(other.gameObject);
             _powerUpIndicator.gameObject.SetActive(true);
-            if(_powerUpTimeOut == null)
+            if(_powerUpTimeOut != null)
             {
-                _powerUpTimeOut = StartCoroutine(PowerUpCountdown());
+                StopCoroutine(_powerUpTimeOut);
             }
-            
+            _powerUpTimeOut = StartCoroutine(PowerUpCountdown());
         }
     }
 
