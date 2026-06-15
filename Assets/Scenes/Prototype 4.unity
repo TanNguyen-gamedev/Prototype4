@@ -133,7 +133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1742899641471652, guid: 923deea38dc6a8843b15db7638919c1e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4428908044626120, guid: 923deea38dc6a8843b15db7638919c1e, type: 3}
       propertyPath: m_LocalScale.x
@@ -988,6 +988,8 @@ MonoBehaviour:
   - {fileID: 8419214858563696883, guid: 3608f36c3c05b8245b25f2695b2ab358, type: 3}
   - {fileID: 1341570530409161041, guid: 539e749a84ecb844cb71343f48bad198, type: 3}
   - {fileID: 1017515815291887413, guid: 6dba1c7603bd5ca419956ccd70e7c4ea, type: 3}
+  _powerUpPrefabs:
+  - {fileID: 5291904643697589432, guid: 6bf9ae2365010a54fbc5c1f491ee9d1d, type: 3}
 --- !u!1001 &5307312999266266024
 PrefabInstance:
   m_ObjectHideFlags: 0
