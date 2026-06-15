@@ -1,8 +1,17 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
+public enum PowerUpType
+{
+    Knockback,
+    HomingMissle,
+    SmashDown
+}
+
 public class PowerUp : MonoBehaviour
 {
+    public PowerUpType PowerType;
+    public float Duration;
     [SerializeField] private float _rotationRate = 30f;
     [SerializeField] private float _bobHeight = 0.5f;
     [SerializeField] private float _bobSpeed = 2f;

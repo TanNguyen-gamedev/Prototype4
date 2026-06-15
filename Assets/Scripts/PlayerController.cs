@@ -1,22 +1,27 @@
 using System.Collections;
-using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    
     [SerializeField] private float _speed = 10f;
     [SerializeField] private float _jumpForce = 5f;
     [SerializeField] private GameObject _focalPoint;
     [SerializeField] private float _gravityModifier = 2f;
     [SerializeField] private float _powerUpStrength = 15f;
     [SerializeField] private GameObject _powerUpIndicator;
+    [SerializeField] private PowerUpManager _powerUpManager;
+
+
+    private bool _isSmashing = false;
+
+    public void SetSmashing(bool value) => _isSmashing = value; 
+
     private InputSystem_Actions _playerInput;
     private Rigidbody _rb;
     private Vector2 _moveInput;
-    private Coroutine _powerUpTimeOut;
-
-    private bool _hasPowerUp;
+    private bool _hasKnockback = false;
 
 
     private void Awake()
@@ -75,37 +80,53 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("PowerUp"))
+        if(other.TryGetComponent<PowerUp>(out var powerUp))
         {
-            _hasPowerUp = true;
-            Destroy(other.gameObject);
+            _powerUpManager.ActivePowerUp(powerUp.PowerType, powerUp.Duration);
+            Destroy(powerUp.gameObject);
             _powerUpIndicator.gameObject.SetActive(true);
-            if(_powerUpTimeOut != null)
-            {
-                StopCoroutine(_powerUpTimeOut);
-            }
-            _powerUpTimeOut = StartCoroutine(PowerUpCountdown());
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Enemy") && _hasPowerUp)
+        if(collision.gameObject.CompareTag("Enemy") && _hasKnockback)
         {
-            Rigidbody enemyRidgebody = collision.gameObject.GetComponent<Rigidbody>();
-            Vector3 awayFromPlayer = (collision.gameObject.transform.position - transform.position);
+               Rigidbody enemyRb = collision.gameObject.GetComponent<Rigidbody>();
+            if(enemyRb)
+            {
+                Vector3 awayFromPlayer = collision.transform.position - transform.position;
+                awayFromPlayer.y = 0f;
 
-            enemyRidgebody.AddForce(awayFromPlayer * _powerUpStrength, ForceMode.Impulse);
+                enemyRb.AddForce(awayFromPlayer.normalized * _powerUpStrength, ForceMode.Impulse);
+            }
+        }
+
+
+        if (_isSmashing && collision.gameObject.CompareTag("Ground"))
+        {
+            _isSmashing = false;
+            _powerUpManager.ApplySmashExplosion();
         }
     }
 
-    private IEnumerator PowerUpCountdown()
+    public void SetKnockback(bool hasKnockback)
     {
-        yield return new WaitForSeconds(7);
-        
-        _powerUpIndicator.gameObject.SetActive(false);
-        _hasPowerUp = false;
-        _powerUpTimeOut = null;
+        _hasKnockback = hasKnockback;
     }
+
+    public void TurnOffTheIndicator()
+    {
+        _powerUpIndicator.SetActive(false);
+    }
+
+    public IEnumerator ApplySmash()
+    {
+        _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+        yield return new WaitForSeconds(0.5f);
+        _rb.AddForce(Vector3.down * _jumpForce * 3f, ForceMode.Impulse);
+        SetSmashing(true);
+    }
+
 
 }

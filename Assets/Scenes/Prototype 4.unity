@@ -282,26 +282,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fd5555088952419ebf0eb82e9096fa5, type: 3}
---- !u!1 &319220508 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5291904643697589432, guid: 6bf9ae2365010a54fbc5c1f491ee9d1d, type: 3}
-  m_PrefabInstance: {fileID: 5307312999266266024}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &322425035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 319220508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da5d69cf83c57444cb38ff6c3e572fd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PowerUp
-  _rotationRate: 30
-  _bobHeight: 0.5
-  _bobSpeed: 1
 --- !u!1 &608015005
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,7 +637,8 @@ GameObject:
   - component: {fileID: 1337397481}
   - component: {fileID: 1337397485}
   - component: {fileID: 1337397486}
-  m_Layer: 0
+  - component: {fileID: 1337397487}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -802,6 +783,25 @@ MonoBehaviour:
   _gravityModifier: 2
   _powerUpStrength: 100
   _powerUpIndicator: {fileID: 221116794}
+  _powerUpManager: {fileID: 1337397487}
+--- !u!114 &1337397487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337397480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eca672d6cac8d424886e2fc532a2f527, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PowerUpManager
+  _misslePrefab: {fileID: 3808959413071701356, guid: 1d05b6503ddc49240889f1d7b27b048c, type: 3}
+  _fireInterval: 0.5
+  _focalPoint: {fileID: 911061976}
+  _explosionForce: 1000
+  _explosionRange: 10
+  _uplift: 2
 --- !u!1001 &1403545340
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -813,6 +813,10 @@ PrefabInstance:
     - target: {fileID: 1301643505922104, guid: 961be46ca9a355943ae3f65c47741bb0, type: 3}
       propertyPath: m_Name
       value: Island
+      objectReference: {fileID: 0}
+    - target: {fileID: 1301643505922104, guid: 961be46ca9a355943ae3f65c47741bb0, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 4625923886776944, guid: 961be46ca9a355943ae3f65c47741bb0, type: 3}
       propertyPath: m_RootOrder
@@ -987,69 +991,11 @@ MonoBehaviour:
   - {fileID: 7665284260665863673, guid: 8a051dac3968c254eae44e4a24adf5c0, type: 3}
   - {fileID: 8419214858563696883, guid: 3608f36c3c05b8245b25f2695b2ab358, type: 3}
   - {fileID: 1341570530409161041, guid: 539e749a84ecb844cb71343f48bad198, type: 3}
-  - {fileID: 1017515815291887413, guid: 6dba1c7603bd5ca419956ccd70e7c4ea, type: 3}
   _powerUpPrefabs:
+  - {fileID: 6252498878211629127, guid: ed9b8a948b7d2664db72b23fd9d7b313, type: 3}
   - {fileID: 5291904643697589432, guid: 6bf9ae2365010a54fbc5c1f491ee9d1d, type: 3}
---- !u!1001 &5307312999266266024
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3164286275514591780, guid: 6bf9ae2365010a54fbc5c1f491ee9d1d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.7823129
-      objectReference: {fileID: 0}
-    - target: {fileID: 3164286275514591780, guid: 6bf9ae2365010a54fbc5c1f491ee9d1d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3164286275514591780, guid: 6bf9ae2365010a54fbc5c1f491ee9d1d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.56182337
-      objectReference: {fileID: 0}
-    - target: {fileID: 3164286275514591780, guid: 6bf9ae2365010a54fbc5c1f491ee9d1d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3164286275514591780, guid: 6bf9ae2365010a54fbc5c1f491ee9d1d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3164286275514591780, guid: 6bf9ae2365010a54fbc5c1f491ee9d1d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3164286275514591780, guid: 6bf9ae2365010a54fbc5c1f491ee9d1d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3164286275514591780, guid: 6bf9ae2365010a54fbc5c1f491ee9d1d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3164286275514591780, guid: 6bf9ae2365010a54fbc5c1f491ee9d1d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3164286275514591780, guid: 6bf9ae2365010a54fbc5c1f491ee9d1d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5291904643697589432, guid: 6bf9ae2365010a54fbc5c1f491ee9d1d, type: 3}
-      propertyPath: m_Name
-      value: PowerUp
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5291904643697589432, guid: 6bf9ae2365010a54fbc5c1f491ee9d1d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 322425035}
-  m_SourcePrefab: {fileID: 100100000, guid: 6bf9ae2365010a54fbc5c1f491ee9d1d, type: 3}
+  - {fileID: 4348389852783921094, guid: 814ce642dc19ee64fbb4a7e86493f1ed, type: 3}
+  _bossPrefab: {fileID: 1017515815291887413, guid: 6dba1c7603bd5ca419956ccd70e7c4ea, type: 3}
 --- !u!1001 &7305732181041295649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1124,5 +1070,4 @@ SceneRoots:
   - {fileID: 2124553757}
   - {fileID: 608015006}
   - {fileID: 1454119988}
-  - {fileID: 5307312999266266024}
   - {fileID: 221116793}

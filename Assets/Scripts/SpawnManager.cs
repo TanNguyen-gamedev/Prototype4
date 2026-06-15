@@ -8,6 +8,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float _spawnInterval;
     [SerializeField] private GameObject[] _enemyPrefabs;
     [SerializeField] private GameObject[] _powerUpPrefabs;
+    [SerializeField] private GameObject _bossPrefab;
     private List<Enemy> _activeEnemies = new List<Enemy>();
     private float _spawnTimer;
     private int _currentWave = 1;
@@ -39,6 +40,14 @@ public class SpawnManager : MonoBehaviour
                 {
                     SpawnEnemy();
                 }
+                if(_currentWave % 5 == 0)
+                {
+                    Instantiate(
+                    _bossPrefab,
+                    GenerateSpawnPosition(),
+                    transform.rotation
+                    );
+                }
                 SpawnPowerUp();
                 _currentWave++;
                 _spawnTimer = 0f;
@@ -50,7 +59,7 @@ public class SpawnManager : MonoBehaviour
     private void SpawnEnemy()
     {
         _activeEnemies.Add(Instantiate(
-            _enemyPrefabs[Random.Range(0,_enemyPrefabs.Length)],
+            _enemyPrefabs[Random.Range(0,_enemyPrefabs.Length-1)],
             GenerateSpawnPosition(),
             transform.rotation
         ).GetComponent<Enemy>());

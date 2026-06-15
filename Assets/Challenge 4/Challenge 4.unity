@@ -406,6 +406,7 @@ MonoBehaviour:
   powerupPrefab: {fileID: 4446131693967519089, guid: c5497424856514b2ba61b78375567988, type: 3}
   enemyCount: 0
   waveCount: 1
+  speedMultiplier: 1.1
   player: {fileID: 583048338}
 --- !u!1001 &258741155
 PrefabInstance:
@@ -694,7 +695,12 @@ MonoBehaviour:
   powerupIndicator: {fileID: 1427939658}
   powerUpDuration: 5
   _jumpBoost: 10
-  smokeParticle: {fileID: 0}
+  smokeParticle: {fileID: 604551484}
+--- !u!198 &604551484 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4392870381175910774, guid: 6562db3a873684fa9b7da3aef8329d82, type: 3}
+  m_PrefabInstance: {fileID: 142475445}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &680832294
 GameObject:
   m_ObjectHideFlags: 0
