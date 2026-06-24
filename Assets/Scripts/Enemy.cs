@@ -22,8 +22,11 @@ public class Enemy : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         // Chase Player
-        Vector3 direction = (_player.transform.position - transform.position).normalized;
-        _rb.AddForce(direction * _speed * Time.deltaTime, ForceMode.Impulse);
+        if (_player != null)
+        {
+            Vector3 direction = (_player.transform.position - transform.position).normalized;
+            _rb.AddForce(direction * _speed, ForceMode.Impulse);
+        }
     }
 
     protected virtual void Update()

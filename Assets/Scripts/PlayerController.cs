@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
     private void MovePlayer()
     {
         Vector3 direction = _moveInput.y * _focalPoint.transform.forward;
-        _rb.AddForce(direction * Time.deltaTime * _speed, ForceMode.Impulse);
+        _rb.AddForce(direction * _speed, ForceMode.Impulse);
     }
 
     private void OnTriggerEnter(Collider other)
